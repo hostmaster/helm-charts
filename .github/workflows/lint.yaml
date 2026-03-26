@@ -40,6 +40,9 @@ jobs:
               charts/kafka-ui \
               -f charts/kafka-ui/values.yaml | \
             docker run --rm -i ghcr.io/yannh/kubeconform:latest \
-              -strict -summary -ignore-missing-schemas -kubernetes-version "$version" - | \
+              -strict -summary -ignore-missing-schemas \
+              -schema-location default \
+              -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json' \
+              -kubernetes-version "$version" - | \
             sed "s/^/v${version}: /"
           done
