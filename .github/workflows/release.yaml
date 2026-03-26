@@ -18,6 +18,11 @@ jobs:
 
       - uses: azure/setup-helm@v4
 
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - uses: helm/chart-releaser-action@v1.6.0
         id: release
         env:
