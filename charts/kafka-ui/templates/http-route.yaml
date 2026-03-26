@@ -11,7 +11,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: {{ tpl ($route.nameOverride | default (printf "%s-%s" $.Chart.Name (first $route.gatewayParentRefs).name)) $ | trunc 54 | trimSuffix "-" }}-httproute
+  name: {{ $route.nameOverride | default (printf "%s-%s" (include "kafka-ui.fullname" $) (first $route.gatewayParentRefs).name) | trunc 54 | trimSuffix "-" }}-httproute
+  namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "kafka-ui.labels" $ | nindent 4 }}
     {{- if $route.labels }}
@@ -28,10 +29,10 @@ spec:
     kind: Gateway
     name: {{ tpl (required (printf "httpRoutes[%d].gatewayParentRefs[%d].name is required." $routeIdx $idx) $parentRef.name) $ }}
     {{- if $parentRef.namespace }}
-    namespace: {{ tpl ($parentRef.namespace) $ }}
+    namespace: {{ $parentRef.namespace }}
     {{- end }}
     {{- if $parentRef.sectionName }}
-    sectionName: {{ tpl ($parentRef.sectionName) $ }}
+    sectionName: {{ $parentRef.sectionName }}
     {{- end }}
   {{- end }}
   {{- if $route.hostnames }}
@@ -51,6 +52,7 @@ spec:
     {{- end }}
     {{- if $route.filters }}
     filters:
+    {{- /* shouldStripPath is prepended before any custom filters */ -}}
     {{- if $route.shouldStripPath }}
     - type: URLRewrite
       urlRewrite:

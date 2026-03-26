@@ -281,9 +281,9 @@ httpRoutes:
     namespace: "gateway-example"
     ## @param httpRoutes.gatewayParentRefs.sectionName [string] The section name of the listener to bind to on the Gateway.
     sectionName: "http-listener"
-  ## @param httpRoutes.shouldStripPath [string] Whether to strip the path before sending the request to the service.
+  ## @param httpRoutes.shouldStripPath [bool] Whether to strip the path before sending the request to the service.
   shouldStripPath: true
-  ## @param httpRoutes.shouldRouteToService [string] Whether this HTTPRoute should route to the backend service.
+  ## @param httpRoutes.shouldRouteToService [bool] Whether this HTTPRoute should route to the backend service.
   shouldRouteToService: true
   ## @param httpRoutes.matches [array] HTTPRoute match rules, ref: https://gateway-api.sigs.k8s.io/reference/spec/#httproutematch.
   matches:
