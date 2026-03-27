@@ -1,3 +1,15 @@
 apiVersion: v1
-entries: {}
-generated: "2026-03-26T00:00:00Z"
+entries:
+  kafka-ui:
+  - apiVersion: v2
+    appVersion: v1.4.2
+    created: "2026-03-27T12:11:32.47021+01:00"
+    description: A Helm chart for kafka-UI
+    digest: 98b188951bbbeb8e8ff946e098db5800a297f5fb6bd3e91c00f8a1918b54771c
+    icon: https://raw.githubusercontent.com/kafbat/kafka-ui/main/documentation/images/logo_new.png
+    name: kafka-ui
+    type: application
+    urls:
+    - https://github.com/hostmaster/helm-charts/releases/download/kafka-ui-1.6.3/kafka-ui-1.6.3.tgz
+    version: 1.6.3
+generated: "2026-03-27T12:11:32.468854+01:00"
